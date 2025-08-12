@@ -2,7 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="UTF-8" />
-<title>Mueble con Caj髇 - Movimiento completo con caja invisible</title>
+<title>Mueble con Caj贸n - Movimiento completo con caja invisible</title>
 <style>
   body { margin: 0; display: flex; background-color: #f5e9d6; font-family: sans-serif; }
   #menu {
@@ -32,14 +32,14 @@
     <input type="number" id="espesor" value="0.03" step="0.001" />
     <button id="generar">Generar Mueble</button>
     <hr />
-    <h3>Configurar Caj髇</h3>
-    <label>Alto Caj髇 (m):</label>
+    <h3>Configurar Caj贸n</h3>
+    <label>Alto Caj贸n (m):</label>
     <input type="number" id="altoCajon" value="0.15" step="0.01" />
-    <label>Ancho Caj髇 (m):</label>
+    <label>Ancho Caj贸n (m):</label>
     <input type="number" id="anchoCajon" value="0.4" step="0.01" />
-    <label>Fondo Caj髇 (m):</label>
+    <label>Fondo Caj贸n (m):</label>
     <input type="number" id="fondoCajon" value="0.4" step="0.01" />
-    <button id="addCajon">A馻dir Caj髇 Inteligente</button>
+    <button id="addCajon">A帽adir Caj贸n Inteligente</button>
   </div>
   <div id="canvas-container"></div>
 
@@ -50,7 +50,7 @@
 <script>
 let scene, camera, renderer, controls, dragControls;
 let mueble, muebleMedidas = {};
-let cajones = [];       // grupos caj髇
+let cajones = [];       // grupos caj贸n
 let dragObjects = [];   // objetos invisibles para arrastre
 
 init();
@@ -126,7 +126,7 @@ function crearPiezaConBordes(geometry, material) {
   const edges = new THREE.EdgesGeometry(geometry);
   const line = new THREE.LineSegments(edges, new THREE.LineBasicMaterial({ color: 0x000000 }));
 
-  line.raycast = () => {}; // evitar que los bordes interfieran con selecci髇
+  line.raycast = () => {}; // evitar que los bordes interfieran con selecci贸n
   mesh.add(line);
   return mesh;
 }
@@ -163,7 +163,7 @@ function crearCajonInteligente(ancho, alto, fondo) {
 
   cajonGrupo.add(base, lateralIzq, lateralDer, trasero, frente);
 
-  // Posici髇 inicial
+  // Posici贸n inicial
   cajonGrupo.position.set(0, -muebleMedidas.alto / 2 + alto / 2 + muebleMedidas.grosor, muebleMedidas.fondo / 2 - fondo / 2 - muebleMedidas.grosor / 2);
   scene.add(cajonGrupo);
 
@@ -175,7 +175,7 @@ function crearCajonInteligente(ancho, alto, fondo) {
   cajaControl.position.copy(cajonGrupo.position);
   scene.add(cajaControl);
 
-  // Asociar control con grupo caj髇 para moverlo
+  // Asociar control con grupo caj贸n para moverlo
   cajaControl.userData.cajonGrupo = cajonGrupo;
 
   cajones.push(cajonGrupo);
@@ -199,7 +199,7 @@ function actualizarDragControls() {
     const grupo = objeto.userData.cajonGrupo;
     if (!grupo) return;
 
-    // Sincronizar posici髇 del grupo con el objeto invisible que se mueve
+    // Sincronizar posici贸n del grupo con el objeto invisible que se mueve
     grupo.position.copy(objeto.position);
   });
 
@@ -221,7 +221,7 @@ function actualizarDragControls() {
     if (objeto.position.z > maxZ) objeto.position.z = maxZ;
     if (objeto.position.z < minZ) objeto.position.z = minZ;
 
-    // Actualizar posici髇 del grupo tras limitar
+    // Actualizar posici贸n del grupo tras limitar
     grupo.position.copy(objeto.position);
   });
 }
